@@ -1,5 +1,3 @@
-# student-def
-조회, 추가, 삭제, 수정이 가능한 학생 성적 프로그램
 # ----- 학생 성적 프로그램 -----
 SUBJECTS = ("국어", "영어", "수학", "과학")
 
@@ -35,9 +33,9 @@ def set_score(students, name, subject, scores):
       return "해당 학생이 없습니다"
     if subject not in SUBJECTS:
       return "존재하지 않는 과목입니다."
-    if score < 0 or score > 100:
+    if scores < 0 or scores > 100:
       return "점수는 0~100점 사이여야 합니다."
-    return f"{name} 학생의 {subject} 점수가 {score}로 저장되었습니다."
+    return f"{name} 학생의 {subject} 점수가 {scores}로 저장되었습니다."
 
 # 4. 특정 학생의 합계 점수를 반환하는 함수 student_total() 작성
 # - 학생의 합계 점수를 반환
@@ -104,17 +102,24 @@ def run_students():
             score = input("점수를 입력하세요: ")
             msg = set_score(students, name, subject, score)
             print(msg)
+
         elif choice == "4":
         # 조회할 학생의 이름을 입력받고 print_student() 함수를 호출하세요.
+            name - input("조회할 학생의 이름을 입력하세요: ")
+            print_student(students,name)
 
-        # elif choice == "5":
+        elif choice == "5":
         # print_all() 함수를 호출하세요.
+            print_all(students)
 
-        # elif choice == "0":
+        elif choice == "0":
         # "프로그램을 종료합니다"를 출력하고 반복문을 종료하세요.
+            print("프로그램을 종료합니다")
+            break
 
-        # else:
-        # #print("잘못된 입력입니다.")
+        else:
+          print("잘못된 입력입니다.")
+
 
 
 run_students()
