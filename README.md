@@ -28,14 +28,15 @@ def remove_student(students, name):
 # - (선택) 존재하는 이름이 없을 경우 "해당 학생이 없습니다." 반환
 # - (선택) 존재하는 과목이 없을 경우 "존재하지 않는 과목입니다." 출력
 # - (선택) 점수가 0 미만 또는 100 초과일 경우 "점수는 0~100점 사이여야 합니다." 출력
-def set_score(students, name, subject, scores):
+def set_score(students, name, subject, score):
     if name not in students:
       return "해당 학생이 없습니다"
-    if subject not in SUBJECTS:
+    elif subject not in SUBJECTS:
       return "존재하지 않는 과목입니다."
-    if scores < 0 or scores > 100:
+    elif score < 0 or score > 100:
       return "점수는 0~100점 사이여야 합니다."
-    return f"{name} 학생의 {subject} 점수가 {scores}로 저장되었습니다."
+    students[name][subject] = score 
+    return f"{name} 학생의 {subject} 점수가 {score}점으로 저장되었습니다."
 
 # 4. 특정 학생의 합계 점수를 반환하는 함수 student_total() 작성
 # - 학생의 합계 점수를 반환
@@ -43,7 +44,7 @@ def set_score(students, name, subject, scores):
 def student_total(students, name):
   if name not in students:
     return None
-  return sum(students[name].values)
+  return sum(students[name].values())
 
 # 5. 특정 학생의 평균 점수를 반환하는 함수 student_avg() 작성
 # - 학생의 평균 점수 반환
@@ -51,15 +52,15 @@ def student_total(students, name):
 def student_avg(students, name):
   if name not in students:
     return None
-  return (sum(students[name].values)) / len(SUBJECTS)
+  return sum(students[name].values()) / len(SUBJECTS)
 
 # 6. 학생 정보를 출력하는 함수 print_student() 작성
 # - "총점: [합계], 평균: [평균]" 출력
 # - (선택) 존재하는 이름이 없을 경우 "해당 학생이 없습니다." 출력
-def print_student(students, name):
+def print_student(students, name, sum, avg):
   if name not in students:
       return "해당 학생이 없습니다"
-  print("총점: " )
+  print(f"총점: {sum}, 평균: {avg}")
 
 # 7. 학생들의 전체 리스트를 조회하는 함수 print_all() 작성
 # - 전체 학생의 이름을 출력
@@ -99,14 +100,16 @@ def run_students():
         # 학생의 이름, 과목(국어/영어/수학/과학), 점수를 입력받고 set_score() 함수를 호출 및 반환된 문자열을 출력하세요.
             name = input("학생의 이름을 입력하세요: ")
             subject = input("과목(국어/영어/수학/과학)을 입력하세요: ")
-            score = input("점수를 입력하세요: ")
+            score = int(input("점수를 입력하세요: "))
             msg = set_score(students, name, subject, score)
             print(msg)
 
         elif choice == "4":
         # 조회할 학생의 이름을 입력받고 print_student() 함수를 호출하세요.
-            name - input("조회할 학생의 이름을 입력하세요: ")
-            print_student(students,name)
+            sum = student_total(students, name)
+            avg = student_avg(students, name)
+            name = input("조회할 학생의 이름을 입력하세요: ")
+            print_student(students, name, sum, avg)
 
         elif choice == "5":
         # print_all() 함수를 호출하세요.
